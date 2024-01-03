@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('sopr_product_determinations', function (Blueprint $table) {
             $table->id();
+            $table->string('code_number');
+            $table->string('id_sopr');
+            $table->string('id_product_determination');
+            $table->string('qty_order');
+            $table->date('delivery_req');
+            $table->text('notes');
             $table->timestamps();
         });
     }
