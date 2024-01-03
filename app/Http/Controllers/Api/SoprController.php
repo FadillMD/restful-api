@@ -14,10 +14,10 @@ class SoprController extends Controller
     public function index()
     {
         //get all posts
-        $soprs = Sopr::latest()->paginate(5);
+        $soprs = Sopr::all();
 
         //return collection of posts as a resource
-        return new SoprResource(true, 'List Data Posts', $soprs);
+        return new SoprResource(true, 'List Data Sopr', $soprs);
     }
 
     public function store(Request $request)
