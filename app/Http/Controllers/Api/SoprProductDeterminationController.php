@@ -17,7 +17,7 @@ class SoprProductDeterminationController extends Controller
         $soprproductdeterminations = SoprProductDetermination::all();
 
         //return collection of posts as a resource
-        return new SoprProductDeterminationResource(true, 'List Data Product Determination', $soprproductdeterminations);
+        return new SoprProductDeterminationResource(true, 'List Data SOPR Order', $soprproductdeterminations);
     }
 
     public function store(Request $request)
@@ -45,7 +45,7 @@ class SoprProductDeterminationController extends Controller
             'notes' => $request->notes,
         ]);
 
-        return new SoprProductDeterminationResource(true, 'Data Product Determination Berhasil Ditambahkan!', $soprproductdeterminations);
+        return new SoprProductDeterminationResource(true, 'Data SOPR Order Berhasil Ditambahkan!', $soprproductdeterminations);
     }
 
     public function show($id_sopr)
@@ -56,6 +56,54 @@ class SoprProductDeterminationController extends Controller
         ->get();
 
         //return single post as a resource
-        return new SoprProductDeterminationResource(true, 'Detail Data Product Determination!', $soprproductdeterminations);
+        return new SoprProductDeterminationResource(true, 'Detail Data SOPR Order!', $soprproductdeterminations);
     }
+
+    public function update(Request $request, $id)
+    {
+        //define validation rules
+        $validator = Validator::make($request->all(), [
+            'code_number' => 'required',
+            'id_sopr' => 'required',
+            'id_product_determination' => 'required',
+            'qty_order' => 'required',
+            'delivery_req' => 'required',
+            'notes' => 'required',
+        ]);
+
+        //check if validation fails
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        //find post by ID
+        $soprproductdeterminations = SoprProductDetermination::find($id);
+
+        //update post without image
+        $soprproductdeterminations->update([
+            'code_number' => $request->code_number,
+            'id_sopr' => $request->id_sopr,
+            'id_product_determination' => $request->id_product_determination,
+            'qty_order' => $request->qty_order,
+            'delivery_req' => $request->delivery_req,
+            'notes' => $request->notes,
+        ]);
+
+        //return response
+        return new SoprProductDeterminationResource(true, 'Data SOPR Order Berhasil Diubah!', $soprproductdeterminations);
+    }
+
+    public function destroy($id)
+    {
+
+        //find post by ID
+        $soprproductdeterminations = SoprProductDetermination::find($id);
+
+        //delete post
+        $soprproductdeterminations->delete();
+
+        //return response
+        return new SoprProductDeterminationResource(true, 'Data SOPR Order Berhasil Dihapus!', null);
+    }
+
 }
