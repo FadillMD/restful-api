@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\web\SoprController;
+use App\Http\Controllers\web\SoprProductDeterminationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,5 @@ Route::get('/', function () {
 });
 
 Route::get('soprs', [SoprController::class,'index']);
+Route::get('sopr-product-determinations', [SoprProductDeterminationController::class,'index']);
+Route::get('sopr-product-determinations/{id}', [SoprProductDeterminationController::class,'show']);

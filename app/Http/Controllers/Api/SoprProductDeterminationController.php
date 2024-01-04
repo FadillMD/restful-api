@@ -14,7 +14,8 @@ class SoprProductDeterminationController extends Controller
     public function index()
     {
         //get all posts
-        $soprproductdeterminations = SoprProductDetermination::all();
+        $soprproductdeterminations = SoprProductDetermination::with(['sopr', 'productDetermination'])
+        ->get();
 
         //return collection of posts as a resource
         return new SoprProductDeterminationResource(true, 'List Data SOPR Order', $soprproductdeterminations);
