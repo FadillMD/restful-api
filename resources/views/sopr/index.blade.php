@@ -257,6 +257,18 @@
               <!-- Bordered Table -->
               <div class="card">
                 <h5 class="card-header">Data SOPR</h5>
+                @if ($errors->any())
+                <div class="card-body">
+                  <div class="alert alert-danger" role="alert">
+                    <ul>
+                      @foreach ($errors->all() as $item)
+                          <li>{{ $item }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
+                </div>  
+                @endif
+                
                 <div class="card-body">
                   <div class="table-responsive text-nowrap">
                     <table class="table table-bordered">

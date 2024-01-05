@@ -256,6 +256,10 @@
 
               <!-- Bordered Table -->
               <div class="card">
+                
+              <div class="card-header inline-spacing">
+                <a href="" type="button" class="btn btn-secondary"><i class="bx bx-chevrons-left"></i> Back</a>
+              </div>
                   <div class="card-body">
                     <h5 class="mb-2 mt-2">No SOPR  : {{ $data[0]['sopr']['no_sopr'] }}</h5>
                     <h5 class="mb-2 mt-2">Customer : {{ $data[0]['sopr']['customer'] }}</h5>
