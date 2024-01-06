@@ -25,7 +25,7 @@ class SoprProductDeterminationController extends Controller
     {
         //define validation rules
         $validator = Validator::make($request->all(), [
-            'code_number' => 'required|string|max:255',
+            'code_number' => 'required|string|max:255|unique:sopr_product_determinations',
             'id_sopr' => 'required|string',
             'id_product_determination' => 'required|string',
             'qty_order' => 'required|string',
@@ -34,7 +34,8 @@ class SoprProductDeterminationController extends Controller
         ]);
     
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return new SoprProductDeterminationResource(false, 'Validasi Gagal', $validator->errors());
+         
         }
     
         $soprproductdeterminations = SoprProductDetermination::create([
@@ -49,13 +50,16 @@ class SoprProductDeterminationController extends Controller
         return new SoprProductDeterminationResource(true, 'Data SOPR Order Berhasil Ditambahkan!', $soprproductdeterminations);
     }
 
-    public function show($id_sopr)
+    public function show($id)
     {
         //find post by ID
         $soprproductdeterminations = SoprProductDetermination::with(['sopr', 'productDetermination'])
-        ->where('id_sopr', $id_sopr)
+        ->where('id_sopr', $id)
         ->get();
-
+        // Check if data is found
+    if ($soprproductdeterminations->isEmpty()) {
+        return new SoprProductDeterminationResource(false, 'No Data Found!', []);
+    }
         //return single post as a resource
         return new SoprProductDeterminationResource(true, 'Detail Data SOPR Order!', $soprproductdeterminations);
     }

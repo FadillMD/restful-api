@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
-class SoprProductDeterminationController extends Controller
+class ProductDeterminationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +14,12 @@ class SoprProductDeterminationController extends Controller
     public function index()
     {
         $client = new Client();
-        $url = "http://localhost:8000/api/sopr-product-determinations";
+        $url = "http://localhost:8000/api/product-determinations";
         $response = $client->request('GET', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content,true);
         $data = $contentArray['data'];
-        return view('order.index',['data'=>$data]);
+        return view('product_determination.index',['data'=>$data]);
     }
 
     /**
@@ -43,19 +43,7 @@ class SoprProductDeterminationController extends Controller
      */
     public function show(string $id)
     {
-        
-        $client = new Client();
-        $url = "http://localhost:8000/api/sopr-product-determinations/$id";
-        $response = $client->request('GET', $url);
-        $content = $response->getBody()->getContents();
-        $contentArray = json_decode($content,true);
-        if($contentArray['success']!=true){
-            $error = $contentArray['message'];
-            return redirect()->to('soprs')->withErrors($error);
-        } else{
-        $data = $contentArray['data'];
-        return view('order.index',['data'=>$data]);
-        }
+        //
     }
 
     /**

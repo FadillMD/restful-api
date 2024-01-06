@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SoprProductDetermination extends Model
+class Opc extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'code_number',
-        'id_sopr',
-        'id_product_determination',
-        'qty_order',
-        'delivery_req',
+        'no_opc',
+        'id_sopr_product_determination',
         'notes',
     ];
+
+    public function soprProductDetermination()
+    {
+        return $this->belongsTo(SoprProductDetermination::class, 'id_sopr_product_determination');
+    }
 
     public function sopr()
     {
@@ -26,10 +27,5 @@ class SoprProductDetermination extends Model
     public function productDetermination()
     {
         return $this->belongsTo(ProductDetermination::class, 'id_product_determination');
-    }
-
-    public function opc()
-    {
-        return $this->hasMany(Opc::class, 'id_opc');
     }
 }

@@ -27,7 +27,7 @@ class SoprController extends Controller
      */
     public function create()
     {
-        //
+        return view('sopr.add_sopr');
     }
 
     /**
@@ -35,7 +35,32 @@ class SoprController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $no_sopr = $request->no_sopr;
+        $no_po = $request->no_po;
+        $customer = $request->customer;
+        $date = $request->order_date;
+
+        $parameter = [
+            'no_sopr' =>$no_sopr,
+            'no_po' =>$no_po,
+            'customer' =>$customer,
+            'order_date' => $date,
+        ];
+
+        $client = new Client();
+        $url = "http://localhost:8000/api/soprs";
+        $response = $client->request('POST', $url,[
+            'headers'=>['Content-type'=>'application/json'],
+            'body'=>json_encode($parameter),
+        ]);
+        $content = $response->getBody()->getContents();
+        $contentArray = json_decode($content,true);
+        if($contentArray['success']!=true){
+            $error = $contentArray['data'];
+            return redirect()->to('soprs/add')->withErrors($error);
+        }
+        $data = $contentArray['data'];
+        print_r($data);
     }
 
     /**

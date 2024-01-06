@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('judul')
-    {{ 'Detail Order SOPR' }}
+    {{ 'OPC' }}
 @endsection
 @section('content')
   <!-- Content -->
@@ -10,15 +10,19 @@
   <div class="card-body mb-0 pb-0"><a href="{{ url()->previous() }}" class="btn btn-sm btn-danger mb-0">
     <i class="bx bx-arrow-back bx-xs"></i> back</a>
   </div>
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <h5 class="mb-0 mt-0">Data OPC</h5>
+    <a href="{{ url('opcs/add') }}" class="btn btn-sm btn-primary mb-0 float-end">
+      <i class="bx bx-plus-circle bx-xs"></i>  Tambah</a>
+  </div>
     <div class="card-body">
-      <h5 class="mb-2 mt-2">No SOPR  : {{ $data[0]['sopr']['no_sopr'] }}</h5>
-      <h5 class="mb-2 mt-2">Customer : {{ $data[0]['sopr']['customer'] }}</h5>
-      <h5 class="mb-4 mt-2">Tanggal Order : {{ $data[0]['sopr']['order_date'] }}</h5>
     <div class="table-responsive ">
       <table class="table table-bordered">
         <thead>
           <tr>
             <th>No</th>
+            <th>No OPC</th>
+            <th>No SOPR</th>
             <th>No PO</th>
             <th>No Produk</th>
             <th>Tipe Produk</th>
@@ -31,11 +35,13 @@
           @foreach ($data as $item)
           <tr>
               <td>{{ $i }}</td>
-              <td>{{ $item['code_number'] }}</td>
-              <td>{{ $item['product_determination']['no_pd'] }}</td>
-              <td>{{ $item['product_determination']['type'] }}</td>
-              <td>{{ $item['qty_order'] }}</td>
-              <td>{{ date('d/m/Y',strtotime($item['delivery_req'])) }}</td>
+              <td>{{ $item['no_opc'] }}</td>
+              <td>{{ $item['sopr_product_determination']['sopr']['no_sopr'] }}</td>
+              <td>{{ $item['sopr_product_determination']['sopr']['no_po'] }}</td>
+              <td>{{ $item['sopr_product_determination']['product_determination']['no_pd'] }}</td>
+              <td>{{ $item['sopr_product_determination']['product_determination']['type'] }}</td>
+              <td>{{ $item['sopr_product_determination']['qty_order'] }}</td>
+              <td>{{ date('d/m/Y',strtotime($item['sopr_product_determination']['delivery_req'])) }}</td>
               
             </tr>
             <?php $i++;?>

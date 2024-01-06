@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\OpcController;
 use App\Http\Controllers\Api\ProductDeterminationController;
 use App\Http\Controllers\Api\SoprController;
 use App\Http\Controllers\Api\SoprProductDeterminationController;
@@ -24,3 +25,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('/soprs', SoprController::class);
 Route::apiResource('/product-determinations', ProductDeterminationController::class);
 Route::apiResource('/sopr-product-determinations', SoprProductDeterminationController::class);
+Route::apiResource('/opcs', OpcController::class);
