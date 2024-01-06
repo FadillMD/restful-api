@@ -20,31 +20,29 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>No</th>
             <th>No OPC</th>
-            <th>No SOPR</th>
-            <th>No PO</th>
             <th>No Produk</th>
             <th>Tipe Produk</th>
             <th>Kuantiti Order</th>
             <th>Delivery</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <?php $i=1;?>
           @foreach ($data as $item)
           <tr>
-              <td>{{ $i }}</td>
               <td>{{ $item['no_opc'] }}</td>
-              <td>{{ $item['sopr_product_determination']['sopr']['no_sopr'] }}</td>
-              <td>{{ $item['sopr_product_determination']['sopr']['no_po'] }}</td>
               <td>{{ $item['sopr_product_determination']['product_determination']['no_pd'] }}</td>
               <td>{{ $item['sopr_product_determination']['product_determination']['type'] }}</td>
-              <td>{{ $item['sopr_product_determination']['qty_order'] }}</td>
+              <td>{{ number_format($item['sopr_product_determination']['qty_order'], 0, ',', ','); }} m</td>
               <td>{{ date('d/m/Y',strtotime($item['sopr_product_determination']['delivery_req'])) }}</td>
-              
+              <td>
+                <a class="btn btn-sm btn-secondary" href="#">
+                <i class="bx bx-show-alt bx-xs me-1"></i> lihat</a>
+                <a class="btn btn-sm btn-warning" href="#">
+                <i class="bx bx-edit-alt bx-xs me-1" type="solid"></i> Edit</a>
+            </td>
             </tr>
-            <?php $i++;?>
           @endforeach
           
         </tbody>
