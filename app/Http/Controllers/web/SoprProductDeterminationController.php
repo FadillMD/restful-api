@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use GrahamCampbell\ResultType\Success;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
@@ -18,8 +19,13 @@ class SoprProductDeterminationController extends Controller
         $response = $client->request('GET', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content,true);
-        $data = $contentArray['data'];
-        return view('order.index',['data'=>$data]);
+        if ($contentArray['success']!=true) {
+            $error = $contentArray['data'];
+            return redirect()->to('sopr.index')->withErrors($error);
+        } else {
+            $data = $contentArray['data'];
+            return view('order.index',['data'=>$data]);
+        }
     }
 
     /**
