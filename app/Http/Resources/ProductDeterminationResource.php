@@ -39,6 +39,5 @@ class ProductDeterminationResource extends JsonResource
             'message'   => $this->message,
             'data'      => $this->resource
         ];
-        // return parent::toArray($request);
     }
 }

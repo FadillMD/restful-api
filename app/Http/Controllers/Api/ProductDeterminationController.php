@@ -46,10 +46,14 @@ class ProductDeterminationController extends Controller
     {
         //find post by ID
         $productdeterminations = ProductDetermination::find($id);
+        if($productdeterminations){
+            return new ProductDeterminationResource(true, 'Detail Data Product Determination!', $productdeterminations);
+        } else{
+            return new ProductDeterminationResource(false, 'Data tidak ditemukan!', null);
 
+        }
         //return single post as a resource
-        return new ProductDeterminationResource(true, 'Detail Data Product Determination!', $productdeterminations);
-    }
+          }
 
     public function update(Request $request, $id)
     {

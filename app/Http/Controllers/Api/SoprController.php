@@ -24,14 +24,15 @@ class SoprController extends Controller
     {
         //define validation rules
         $validator = Validator::make($request->all(), [
-            'no_sopr' => 'required|string|max:255',
+            'no_sopr' => 'required|string|max:255|unique:soprs',
             'no_po' => 'required|string|max:255',
             'customer' => 'required|string|max:255',
             'order_date' => 'required|date',
         ]);
     
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return new SoprResource(false, 'Validasi Gagal', $validator->errors());
+            // return response()->json($validator->errors(), 422);
         }
     
         $soprs = Sopr::create([
@@ -48,9 +49,12 @@ class SoprController extends Controller
     {
         //find post by ID
         $sopr = Sopr::find($id);
-
-        //return single post as a resource
-        return new SoprResource(true, 'Detail Data Post!', $sopr);
+        if($sopr){
+        //jika ditemukan
+            return new SoprResource(true, 'Detail Data Post!', $sopr);
+        } else{
+            return new SoprResource(false, 'Detail Data Post!', null);
+        }
     }
 
     public function update(Request $request, $id)

@@ -27,4 +27,9 @@ class SoprProductDetermination extends Model
     {
         return $this->belongsTo(ProductDetermination::class, 'id_product_determination');
     }
+
+    public function opc()
+    {
+        return $this->hasMany(Opc::class, 'id_opc');
+    }
 }
