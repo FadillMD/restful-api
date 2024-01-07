@@ -34,7 +34,7 @@
               <td>{{ $item['no_opc'] }}</td>
               <td>{{ $item['sopr_product_determination']['product_determination']['no_pd'] }}</td>
               <td>{{ $item['sopr_product_determination']['product_determination']['type'] }}</td>
-              <td>{{ number_format($item['sopr_product_determination']['qty_order'], 0, ',', ','); }} m</td>
+              <td>{{ number_format($item['sopr_product_determination']['qty_order'], 0, ',', ',') }} m</td>
               <td>{{ date('d/m/Y',strtotime($item['sopr_product_determination']['delivery_req'])) }}</td>
               <td>
                 <a class="btn btn-sm btn-secondary" href="#">

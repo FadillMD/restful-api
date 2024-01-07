@@ -57,10 +57,10 @@ class SoprController extends Controller
         $contentArray = json_decode($content,true);
         if($contentArray['success']!=true){
             $error = $contentArray['data'];
-            return redirect()->to('soprs/add')->withErrors($error);
+            return redirect()->to('soprs/add')->withErrors($error)->withInput();
+        }else{
+            return redirect()->to('soprs')->with('success', 'berhasil menambahkan data!');
         }
-        $data = $contentArray['data'];
-        print_r($data);
     }
 
     /**
@@ -76,7 +76,13 @@ class SoprController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $client = new Client();
+        $url = "http://localhost:8000/api/soprs/$id";
+        $response = $client->request('GET', $url);
+        $content = $response->getBody()->getContents();
+        $contentArray = json_decode($content,true);
+        $data = $contentArray['data'];
+        return view('sopr.edit',['data'=>$data]);
     }
 
     /**
@@ -84,7 +90,32 @@ class SoprController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $no_sopr = $request->no_sopr;
+        $no_po = $request->no_po;
+        $customer = $request->customer;
+        $date = $request->order_date;
+
+        $parameter = [
+            'no_sopr' =>$no_sopr,
+            'no_po' =>$no_po,
+            'customer' =>$customer,
+            'order_date' => $date,
+        ];
+
+        $client = new Client();
+        $url = "http://localhost:8000/api/soprs/$id";
+        $response = $client->request('PUT', $url,[
+            'headers'=>['Content-type'=>'application/json'],
+            'body'=>json_encode($parameter),
+        ]);
+        $content = $response->getBody()->getContents();
+        $contentArray = json_decode($content,true);
+        if($contentArray['success']!=true){
+            $error = $contentArray['data'];
+            return redirect()->to('soprs/add')->withErrors($error)->withInput();
+        }else{
+            return redirect()->to('soprs')->with('success', 'berhasil melakukan update data!');
+        }
     }
 
     /**
@@ -92,6 +123,16 @@ class SoprController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $client = new Client();
+        $url = "http://localhost:8000/api/soprs/$id";
+        $response = $client->request('DELETE', $url);
+        $content = $response->getBody()->getContents();
+        $contentArray = json_decode($content,true);
+        if($contentArray['success']!=true){
+            $error = $contentArray['data'];
+            return redirect()->to('soprs')->withErrors($error);
+        }else{            
+            return redirect()->to('soprs')->with('success', 'Berhasil melakukan Hapus data!');
+        }
     }
 }

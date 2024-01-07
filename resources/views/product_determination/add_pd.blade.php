@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('judul')
-    {{ 'Tambah Data SOPR' }}
+    {{ 'Tambah Data Product Determination' }}
 @endsection
 @section('content')
 <!-- Content -->
@@ -8,7 +8,7 @@
 <!-- Basic with Icons -->
 <div class="col-xxl">
     <div class="card mb-4">
-      <div class="card-body mb-0 pb-0"><a href="{{ url('soprs') }}" class="btn btn-sm btn-danger mb-0">
+      <div class="card-body mb-0 pb-0"><a href="{{ url('product-determinations') }}" class="btn btn-sm btn-danger mb-0">
         <i class="bx bx-arrow-back bx-xs"></i> back</a>
       </div>
       @if($errors->any())
@@ -21,14 +21,14 @@
       </div>
       @endif
       <div class="card-header d-flex align-items-center justify-content-between mt-0">
-        <h5 class="mb-0">Tambahkan Data SOPR</h5>
+        <h5 class="mb-0">Tambahkan Data Product Determination</h5>
         <small class="text-muted float-end">Mohon teliti dalam memasukan data</small>
       </div>
       <div class="card-body">
-        <form action="{{  url('soprs/add') }}" method="POST">
+        <form action="{{  url('product-determinations/add') }}" method="POST">
             @csrf
           <div class="row mb-3">
-            <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">No SOPR</label>
+            <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">No Product</label>
             <div class="col-sm-10">
               <div class="input-group input-group-merge">
                 <span id="basic-icon-default-fullname2" class="input-group-text"
@@ -38,17 +38,15 @@
                   type="text"
                   class="form-control"
                   id="basic-icon-default-fullname"
-                  placeholder="008/MK/SOPR/I/23"
-                  aria-label="John Doe"
-                  aria-describedby="basic-icon-default-fullname2"
-                  name="no_sopr"
-                  value="{{ old('no_sopr') }}"
+                  placeholder="27202N01X1WH4"
+                  name="no_pd"
+                  value="{{ old('no_pd') }}"
                 />
               </div>
             </div>
           </div>
           <div class="row mb-3">
-            <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">No PO</label>
+            <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Type</label>
             <div class="col-sm-10">
               <div class="input-group input-group-merge">
                 <span id="basic-icon-default-fullname2" class="input-group-text"
@@ -58,15 +56,15 @@
                   type="text"
                   class="form-control"
                   id="basic-icon-default-fullname"
-                  placeholder="P6851"
-                  name="no_po"
-                  value="{{ old('no_po') }}"
+                  placeholder="NYAF 1 mm2 450/750 V FIRST CABLE White-4"
+                  name="type"
+                  value="{{ old('type') }}"
                 />
               </div>
             </div>
           </div>
           <div class="row mb-3">
-            <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Customer</label>
+            <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Marking</label>
             <div class="col-sm-10">
               <div class="input-group input-group-merge">
                 <span id="basic-icon-default-company2" class="input-group-text"
@@ -76,22 +74,13 @@
                   type="text"
                   id="basic-icon-default-company"
                   class="form-control"
-                  placeholder="ACME Inc."
-                  name="customer"
-                  value="{{ old('customer') }}"
+                  name="marking"
+                  value="{{ old('marking') }}"
                 />
               </div>
             </div>
           </div>
-          <div class="row mb-3">
-            <label class="col-sm-2 col-form-label" for="basic-icon-default-email">Tanggal Order</label>
-            <div class="col-sm-10">
-              <div class="input-group input-group-merge">
-                <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                <input class="form-control" name="order_date" type="date" value="{{ old('order_date') }}" id="html5-date-input" />
-              </div>
-            </div>
-          </div>
+          
           <div class="row justify-content-end">
             <div class="col-sm-10">
               <button type="submit" name="submit" class="btn btn-primary">Tambah</button>

@@ -71,61 +71,51 @@
 
       <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item">
-          <a href="{{ url('dashboard') }}" class="menu-link">
+        <li class="menu-item {{ Route::is('dashboard') ? 'active' : '' }}">
+          <a href="{{ url('/') }}" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div data-i18n="Analytics">Dashboard</div>
           </a>
         </li>
 
-        <!-- Layouts -->
-        <li class="menu-item active open">
+        <!-- PPIC -->
+        <li class="menu-item {{ Route::is('soprs.*','opcs.*','detail.*','order.*') ? 'active open' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-layout"></i>
             <div data-i18n="Layouts">PPIC</div>
           </a>
 
           <ul class="menu-sub">
-            <li class="menu-item active">
+            <li class="menu-item {{ Route::is('soprs.*','detail.order') ? 'active' : '' }}">
               <a href="{{ url('soprs') }}" class="menu-link">
                 <div data-i18n="Without menu">Data SOPR</div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item {{ Route::is('opcs.index') ? 'active' : '' }}">
               <a href="{{ url('opcs') }}" class="menu-link">
                 <div data-i18n="Without navbar">Data OPC</div>
               </a>
             </li>
-            <li class="menu-item">
-              <a href="layouts-container.html" class="menu-link">
-                <div data-i18n="Container">Container</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="layouts-fluid.html" class="menu-link">
-                <div data-i18n="Fluid">Fluid</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="layouts-blank.html" class="menu-link">
-                <div data-i18n="Blank">Blank</div>
+            <li class="menu-item {{ Route::is('order.index') ? 'active' : '' }}">
+              <a href="{{ url('orders') }}" class="menu-link">
+                <div data-i18n="Without navbar">Data Customer Order</div>
               </a>
             </li>
           </ul>
         </li>
 
-                    <!-- Forms & Tables -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp; Tables</span></li>
+                    <!-- Quality & Analysis -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Quality &amp; Analysis</span></li>
         <!-- Forms -->
-        <li class="menu-item">
+        <li class="menu-item {{ Route::is('pd.*') ? 'active open' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-detail"></i>
-            <div data-i18n="Form Elements">Form Elements</div>
+            <div data-i18n="Form Elements">Product Determination</div>
           </a>
           <ul class="menu-sub">
-            <li class="menu-item">
-              <a href="forms-basic-inputs.html" class="menu-link">
-                <div data-i18n="Basic Inputs">Basic Inputs</div>
+            <li class="menu-item {{ Route::is('pd.index','pd.add') ? 'active' : '' }}">
+              <a href="{{ url('product-determinations') }}" class="menu-link">
+                <div data-i18n="Basic Inputs">Data PDV</div>
               </a>
             </li>
             <li class="menu-item">

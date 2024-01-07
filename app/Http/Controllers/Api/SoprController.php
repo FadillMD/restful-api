@@ -69,7 +69,7 @@ class SoprController extends Controller
 
         //check if validation fails
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return new SoprResource(false, 'Validasi Gagal', $validator->errors());
         }
 
         //find post by ID
@@ -84,7 +84,7 @@ class SoprController extends Controller
         ]);
 
         //return response
-        return new SoprResource(true, 'Data Post Berhasil Diubah!', $sopr);
+        return new SoprResource(true, 'Data SOPR Berhasil Diubah!', $sopr);
     }
 
     public function destroy($id)

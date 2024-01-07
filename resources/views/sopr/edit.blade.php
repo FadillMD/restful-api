@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('judul')
-    {{ 'Tambah Data SOPR' }}
+    {{ 'Perbaharui Data SOPR' }}
 @endsection
 @section('content')
 <!-- Content -->
@@ -21,12 +21,13 @@
       </div>
       @endif
       <div class="card-header d-flex align-items-center justify-content-between mt-0">
-        <h5 class="mb-0">Tambahkan Data SOPR</h5>
+        <h5 class="mb-0">Perbaharui Data SOPR</h5>
         <small class="text-muted float-end">Mohon teliti dalam memasukan data</small>
       </div>
       <div class="card-body">
-        <form action="{{  url('soprs/add') }}" method="POST">
+        <form action="{{  url('soprs/edit/'.$data['id']); }}" method="POST">
             @csrf
+            @method('put')
           <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">No SOPR</label>
             <div class="col-sm-10">
@@ -42,7 +43,7 @@
                   aria-label="John Doe"
                   aria-describedby="basic-icon-default-fullname2"
                   name="no_sopr"
-                  value="{{ old('no_sopr') }}"
+                  value="{{ $data['no_sopr'] }}"
                 />
               </div>
             </div>
@@ -60,7 +61,7 @@
                   id="basic-icon-default-fullname"
                   placeholder="P6851"
                   name="no_po"
-                  value="{{ old('no_po') }}"
+                  value="{{ $data['no_po'] }}"
                 />
               </div>
             </div>
@@ -78,7 +79,7 @@
                   class="form-control"
                   placeholder="ACME Inc."
                   name="customer"
-                  value="{{ old('customer') }}"
+                  value="{{ $data['customer'] }}"
                 />
               </div>
             </div>
@@ -88,13 +89,13 @@
             <div class="col-sm-10">
               <div class="input-group input-group-merge">
                 <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                <input class="form-control" name="order_date" type="date" value="{{ old('order_date') }}" id="html5-date-input" />
+                <input class="form-control" name="order_date" type="date" value="{{ $data['order_date'] }}" id="html5-date-input" />
               </div>
             </div>
           </div>
           <div class="row justify-content-end">
             <div class="col-sm-10">
-              <button type="submit" name="submit" class="btn btn-primary">Tambah</button>
+              <button type="submit" name="submit" class="btn btn-primary">Perbaharui</button>
             </div>
           </div>
         </form>

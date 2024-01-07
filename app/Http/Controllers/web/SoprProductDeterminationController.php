@@ -24,7 +24,7 @@ class SoprProductDeterminationController extends Controller
             return redirect()->to('sopr.index')->withErrors($error);
         } else {
             $data = $contentArray['data'];
-            return view('order.index',['data'=>$data]);
+            return view('order.get',['data'=>$data]);
         }
     }
 
@@ -33,7 +33,7 @@ class SoprProductDeterminationController extends Controller
      */
     public function create()
     {
-        //
+        return view('order.add_order');
     }
 
     /**
@@ -50,18 +50,6 @@ class SoprProductDeterminationController extends Controller
     public function show(string $id)
     {
         
-        $client = new Client();
-        $url = "http://localhost:8000/api/sopr-product-determinations/$id";
-        $response = $client->request('GET', $url);
-        $content = $response->getBody()->getContents();
-        $contentArray = json_decode($content,true);
-        if($contentArray['success']!=true){
-            $error = $contentArray['message'];
-            return redirect()->to('soprs')->withErrors($error);
-        } else{
-        $data = $contentArray['data'];
-        return view('order.index',['data'=>$data]);
-        }
     }
 
     /**

@@ -27,7 +27,7 @@ class ProductDeterminationController extends Controller
      */
     public function create()
     {
-        //
+        return view('product_determination.add_pd');
     }
 
     /**
@@ -35,7 +35,30 @@ class ProductDeterminationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $no_pd = $request->no_pd;
+        $type = $request->type;
+        $marking = $request->marking;
+
+        $parameter = [
+            'no_pd' =>$no_pd,
+            'type' =>$type,
+            'marking' =>$marking,
+        ];
+
+        $client = new Client();
+        $url = "http://localhost:8000/api/product-determinations";
+        $response = $client->request('POST', $url,[
+            'headers'=>['Content-type'=>'application/json'],
+            'body'=>json_encode($parameter),
+        ]);
+        $content = $response->getBody()->getContents();
+        $contentArray = json_decode($content,true);
+        if($contentArray['success']!=true){
+            $error = $contentArray['data'];
+            return redirect()->to('product-determinations/add')->withErrors($error)->withInput();
+        }else{
+            return redirect()->to('product-determinations')->with('success', 'berhasil menambahkan data!');
+        }
     }
 
     /**
@@ -51,7 +74,13 @@ class ProductDeterminationController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $client = new Client();
+        $url = "http://localhost:8000/api/soprs/$id";
+        $response = $client->request('GET', $url);
+        $content = $response->getBody()->getContents();
+        $contentArray = json_decode($content,true);
+        $data = $contentArray['data'];
+        return view('sopr.edit',['data'=>$data]);
     }
 
     /**

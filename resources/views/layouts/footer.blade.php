@@ -9,26 +9,9 @@
                     document.write(new Date().getFullYear());
                   </script>
                   , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
+                  <a href="https://github.com/FadillMD" target="_blank" class="footer-link fw-bolder">FadillMD</a>
                 </div>
-                <div>
-                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                  <a
-                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Documentation</a
-                  >
-
-                  <a
-                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Support</a
-                  >
-                </div>
+                
               </div>
             </footer>
             <!-- / Footer -->
@@ -54,13 +37,17 @@
 
     <script src="{{ asset('assets') }}/vendor/js/menu.js"></script>
     <!-- endbuild -->
-
     <!-- Vendors JS -->
+    <script src="{{ asset('assets') }}/vendor/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Main JS -->
     <script src="{{ asset('assets') }}/js/main.js"></script>
 
     <!-- Page JS -->
+    <script src="{{ asset('assets') }}/js/dashboards-analytics.js"></script>
+
+    <!-- Main JS -->
+    <script src="{{ asset('assets') }}/js/main.js"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
