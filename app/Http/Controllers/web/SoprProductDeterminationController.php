@@ -33,7 +33,19 @@ class SoprProductDeterminationController extends Controller
      */
     public function create()
     {
-        return view('order.add_order');
+        $client = new Client();
+        $url = "http://localhost:8000/api/soprs";
+        $response = $client->request('GET', $url);
+        $content = $response->getBody()->getContents();
+        $contentArray = json_decode($content,true);
+        $data = $contentArray['data'];
+
+        $url1 = "http://localhost:8000/api/product-determinations";
+        $response1 = $client->request('GET', $url1);
+        $content1 = $response1->getBody()->getContents();
+        $contentArray1 = json_decode($content1,true);
+        $data1 = $contentArray1['data'];
+        return view('order.add_order',['data'=>$data],['data1'=>$data1]);
     }
 
     /**

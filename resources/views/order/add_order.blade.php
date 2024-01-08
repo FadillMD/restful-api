@@ -27,7 +27,7 @@
           <div class="card-body">
             <form action="{{  url('orders/add') }}" method="POST">
                 @csrf
-              <div class="row mb-3">
+                <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">No Order</label>
                 <div class="col-sm-10">
                   <div class="input-group input-group-merge">
@@ -48,20 +48,18 @@
                 </div>
               </div>
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">No PO</label>
+                <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">No Order</label>
                 <div class="col-sm-10">
-                  <div class="input-group input-group-merge">
-                    <span id="basic-icon-default-fullname2" class="input-group-text"
-                      ><i class="bx bx-detail"></i></i
-                    ></span>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="P6851"
-                      name="id_sopr"
-                      value="{{ old('id_sopr') }}"
-                    />
-                  </div>
+                    <div class="input-group input-group-merge">
+                      <span id="basic-icon-default-company2" class="input-group-text">
+                        <i class="bx bx-buildings"></i></span>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                          <option selected>Open this select menu</option>
+                          @foreach ($data as $item)
+                            <option value="{{ $item['id'] }}">{{ $item['no_sopr'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
               </div>
               <div class="row mb-3">
@@ -71,16 +69,16 @@
                       <span id="basic-icon-default-company2" class="input-group-text">
                         <i class="bx bx-buildings"></i></span>
                         <select class="form-control" id="exampleFormControlSelect1">
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                          <option selected>Open this select menu</option>
+                          @foreach ($data1 as $item)
+                            <option value="{{ $item['id'] }}">{{ $item['no_pd'] }} | {{ $item['type'] }} </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
               </div>
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Customer</label>
+                <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Kuantiti Order</label>
                 <div class="col-sm-10">
                   <div class="input-group input-group-merge">
                     <span id="basic-icon-default-company2" class="input-group-text"
@@ -90,9 +88,9 @@
                       type="text"
                       id="basic-icon-default-company"
                       class="form-control"
-                      placeholder="ACME Inc."
-                      name="customer"
-                      value="{{ old('customer') }}"
+                      placeholder=""
+                      name="qty_order"
+                      value="{{ old('qty_order') }}"
                     />
                   </div>
                 </div>

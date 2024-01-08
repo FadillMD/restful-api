@@ -15,7 +15,7 @@
     @endif
     <div class="card-header d-flex align-items-center justify-content-between">
       <h5 class="mb-0 mt-0">Data Customer Order</h5>
-      <a href="{{ url('orders/create') }}" class="btn btn-sm btn-primary mb-0 float-end">
+      <a href="{{ url('orders/add') }}" class="btn btn-sm btn-primary mb-0 float-end">
         <i class="bx bx-plus-circle bx-xs"></i>  Tambah</a>
     </div>
     <div class="card-body">
