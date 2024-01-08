@@ -39,4 +39,5 @@ Route::get('opcs', [OpcController::class,'index'])->name('opcs.index');
 //Sopr Order Data Route
 Route::get('orders', [SoprProductDeterminationController::class,'index'])->name('order.index');
 Route::get('order/{id}', [SoprProductDeterminationController::class,'show'])->name('order.show');
-Route::get('orders/add', [SoprProductDeterminationController::class,'create'])->name('order.create');
+Route::get('orders/add', [SoprProductDeterminationController::class,'create'])->name('order.add');
+Route::post('orders/add', [SoprProductDeterminationController::class,'store'])->name('order.create');

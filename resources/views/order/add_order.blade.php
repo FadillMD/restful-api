@@ -38,7 +38,7 @@
                       type="text"
                       class="form-control"
                       id="basic-icon-default-fullname"
-                      placeholder="008/MK/SOPR/I/23"
+                      placeholder="FC2001.0123"
                       aria-label="John Doe"
                       aria-describedby="basic-icon-default-fullname2"
                       name="code_number"
@@ -48,13 +48,13 @@
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">No Order</label>
+                <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">No SOPR</label>
                 <div class="col-sm-10">
                     <div class="input-group input-group-merge">
                       <span id="basic-icon-default-company2" class="input-group-text">
                         <i class="bx bx-buildings"></i></span>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                          <option selected>Open this select menu</option>
+                        <select class="form-control" name="id_sopr" id="exampleFormControlSelect1">
+                          <option selected>Pilih SOPR</option>
                           @foreach ($data as $item)
                             <option value="{{ $item['id'] }}">{{ $item['no_sopr'] }}</option>
                             @endforeach
@@ -68,8 +68,8 @@
                     <div class="input-group input-group-merge">
                       <span id="basic-icon-default-company2" class="input-group-text">
                         <i class="bx bx-buildings"></i></span>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                          <option selected>Open this select menu</option>
+                        <select class="form-control" name="id_product_determination" id="exampleFormControlSelect1">
+                          <option selected>Pilih PD Type</option>
                           @foreach ($data1 as $item)
                             <option value="{{ $item['id'] }}">{{ $item['no_pd'] }} | {{ $item['type'] }} </option>
                             @endforeach
@@ -88,7 +88,7 @@
                       type="text"
                       id="basic-icon-default-company"
                       class="form-control"
-                      placeholder=""
+                      placeholder="10000"
                       name="qty_order"
                       value="{{ old('qty_order') }}"
                     />
@@ -96,11 +96,31 @@
                 </div>
               </div>
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-icon-default-email">Tanggal Order</label>
+                <label class="col-sm-2 col-form-label" for="basic-icon-default-email">Tanggal Pengiriman</label>
                 <div class="col-sm-10">
                   <div class="input-group input-group-merge">
                     <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                    <input class="form-control" name="order_date" type="date" value="{{ old('order_date') }}" id="html5-date-input" />
+                    <input class="form-control" name="delivery_req" type="date" value="{{ old('delivery_req') }}" id="html5-date-input" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Notes</label>
+                <div class="col-sm-10">
+                  <div class="input-group input-group-merge">
+                    <span id="basic-icon-default-fullname2" class="input-group-text"
+                      ><i class="bx bx-detail"></i></i
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="basic-icon-default-fullname"
+                      placeholder="keterangan"
+                      aria-label="John Doe"
+                      aria-describedby="basic-icon-default-fullname2"
+                      name="notes"
+                      value="{{ old('notes') }}"
+                    />
                   </div>
                 </div>
               </div>

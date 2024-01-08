@@ -53,7 +53,35 @@ class SoprProductDeterminationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $code_number = $request->code_number;
+        $id_sopr = $request->id_sopr;
+        $id_product_determination = $request->id_product_determination;
+        $qty_order = $request->qty_order;
+        $delivery_req = $request->delivery_req;
+        $notes = $request->notes;
+
+        $parameter = [
+            'code_number' =>$code_number,
+            'id_sopr' =>$id_sopr,
+            'id_product_determination' =>$id_product_determination,
+            'qty_order' => $qty_order,
+            'delivery_req' =>$delivery_req, //date('Y/m/d',strtotime($delivery_req)),
+            'notes' => $notes,
+        ];
+        $client = new Client();
+        $url = "http://localhost:8000/api/sopr-product-determinations";
+        $response = $client->request('POST', $url,[
+            'headers'=>['Content-type'=>'application/json'],
+            'body'=>json_encode($parameter),
+        ]);
+        $content = $response->getBody()->getContents();
+        $contentArray = json_decode($content,true);
+        if($contentArray['success']!=true){
+            $error = $contentArray['data'];
+            return redirect()->to('orders/add')->withErrors($error)->withInput();
+        }else{
+            return redirect()->to('orders')->with('success', 'berhasil menambahkan data!');
+        }
     }
 
     /**
