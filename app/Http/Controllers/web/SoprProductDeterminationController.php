@@ -89,7 +89,25 @@ class SoprProductDeterminationController extends Controller
      */
     public function show(string $id)
     {
-        
+        $client = new Client();
+        $url = "http://localhost:8000/api/sopr-product-determinations/$id";
+        $response = $client->request('GET', $url);
+        $content = $response->getBody()->getContents();
+        $contentArray = json_decode($content,true);
+        if($contentArray['success']!=true){
+            $url = "http://localhost:8000/api/soprs/$id";
+            $response = $client->request('GET', $url);
+            $content = $response->getBody()->getContents();
+            $contentArray1 = json_decode($content,true);
+            $data = $contentArray1['data'];
+            return view('order.show_id',['data'=>$data])->with('kosong','tidak ada data order');
+            // return redirect()->to('orders/add')->withErrors()->withInput();
+        }else{
+            $data = $contentArray['data'];
+            return view('order.show_id',['data'=>$data]);
+            // return redirect()->to('orders')->with('success', 'berhasil menambahkan data!');
+        }
+        // $data = $contentArray['data'];
     }
 
     /**
